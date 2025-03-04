@@ -1,0 +1,33 @@
+{
+  "name": "fastify-study",
+  "version": "1.0.0",
+  "description": "fastify-study",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
+    "start": "npm run dev",
+    "dev": "npx tsx src/main.ts",
+    "dev:live": "nodemon --watch 'src/' --exec node --loader ts-node/esm src/main.ts --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yhames/fastify-study.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yhames/fastify-study/issues"
+  },
+  "homepage": "https://github.com/yhames/fastify-study#readme",
+  "dependencies": {
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}
