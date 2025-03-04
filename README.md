@@ -13,7 +13,7 @@ npm init
 - `fastify`, `fastify-plugin` 설치
 
 ```bash
-npm i fastify
+npm i fastify fastify-plugin
 ```
 
 - `typescript`, `@types/node` 설치
@@ -57,4 +57,11 @@ npx prisma migrate dev --name init
 ```bash
 npm i dotenv
 npm i -D @types/dotenv
+```
+
+- websocket 설치
+
+```bash
+npm i @fastify/websocket
+npm i -D @types/ws
 ```
