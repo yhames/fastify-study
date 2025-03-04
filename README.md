@@ -47,3 +47,9 @@ npm i -D prisma
 ```bash
 npx prisma init --datasource-provider sqlite
 ```
+
+- prisma 마이그레이션
+
+```bash
+npx prisma migrate dev --name init
+```
