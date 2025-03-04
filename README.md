@@ -7,7 +7,7 @@ fastify-study
 - npm 초기화
 
 ```bash
-npm init`
+npm init
 ```
 
 - `fastify`, `fastify-plugin` 설치
@@ -17,8 +17,6 @@ npm i fastify
 ```
 
 - `typescript`, `@types/node` 설치
-
-@type/node는 Node.js의 타입 정의를 제공하는 TypeScript 패키지
 
 ```bash
 npm i -D typescript @types/node
@@ -52,4 +50,11 @@ npx prisma init --datasource-provider sqlite
 
 ```bash
 npx prisma migrate dev --name init
+```
+
+- dotenv 설치
+
+```bash
+npm i dotenv
+npm i -D @types/dotenv
 ```

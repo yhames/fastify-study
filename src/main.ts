@@ -1,9 +1,11 @@
 import fastify from 'fastify';
-import { AddressInfo } from 'net';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env' });
 
 const app = fastify({
   logger: {
-    level: 'info',
+    level: process.env.LOG_LEVEL,
   },
 });
 
@@ -13,7 +15,10 @@ app.get('/ping', async (request, reply) => {
 
 const start = async () => {
   try {
-    await app.listen({ port: 8080 });
+    await app.listen({
+      host: process.env.HOST || '127.0.0.1',
+      port: parseInt(process.env.PORT || '8080'),
+    });
   } catch (err) {
     app.log.error(err);
     process.exit(1);

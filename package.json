@@ -22,10 +22,12 @@
   "homepage": "https://github.com/yhames/fastify-study#readme",
   "dependencies": {
     "@prisma/client": "^6.4.1",
+    "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "fastify-plugin": "^5.0.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/node": "^22.13.9",
     "nodemon": "^3.1.9",
     "prisma": "^6.4.1",
