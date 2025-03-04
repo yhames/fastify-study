@@ -10,7 +10,7 @@ fastify-study
 npm init`
 ```
 
-- `fastify` 설치
+- `fastify`, `fastify-plugin` 설치
 
 ```bash
 npm i fastify
@@ -34,4 +34,16 @@ npx tsc --init
 
 ```bash
 npm i -D ts-node nodemon tsx
+```
+
+- prisma 설치
+
+```bash
+npm i -D prisma
+```
+
+- prisma 초기화 (SQLite)
+
+```bash
+npx prisma init --datasource-provider sqlite
 ```
