@@ -1,16 +1,21 @@
 import fastify from 'fastify';
+import { AddressInfo } from 'net';
 
-const server = fastify();
+const app = fastify({
+  logger: {
+    level: 'info',
+  },
+});
 
-server.get('/ping', async (request, reply) => {
+app.get('/ping', async (request, reply) => {
   return 'pong\n';
 });
 
 const start = async () => {
   try {
-    await server.listen({ port: 8080 });
+    await app.listen({ port: 8080 });
   } catch (err) {
-    server.log.error(err);
+    app.log.error(err);
     process.exit(1);
   }
 };

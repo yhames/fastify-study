@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/yhames/fastify-study#readme",
   "dependencies": {
-    "fastify": "^5.2.1"
+    "fastify": "^5.2.1",
+    "fastify-plugin": "^5.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.13.9",
