@@ -3,6 +3,7 @@ import websocket from '@fastify/websocket';
 import dotenv from 'dotenv';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import routes from './routes';
+import { HOST, PORT } from './global/constant';
 
 dotenv.config({ path: '.env' });
 
@@ -18,8 +19,8 @@ await fastify.register(routes);
 const start = async () => {
   try {
     await fastify.listen({
-      host: process.env.HOST || '127.0.0.1',
-      port: parseInt(process.env.PORT || '8080'),
+      host: HOST,
+      port: PORT,
     });
   } catch (err) {
     fastify.log.error(err);
