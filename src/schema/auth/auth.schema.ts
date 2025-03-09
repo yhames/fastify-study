@@ -1,5 +1,5 @@
 import { Type } from '@sinclair/typebox';
-import { TAuthBody, TAuthResponse } from './auth.type';
+import { TAuthBody, TAuthResponse } from './auth.typebox';
 
 const registerSchema = {
   body: TAuthBody,
