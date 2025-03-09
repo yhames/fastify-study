@@ -60,6 +60,22 @@ const verifyRefreshToken = async (
   return payload;
 };
 
+const shoreVerifyRefreshToken = (refreshToken: string): boolean => {
+  const payload = jwt.verify(refreshToken, JWT_SECRET) as AuthPayload;
+  if (!payload) {
+    return false;
+  }
+  return true;
+};
+
+const verifyAccessToken = (accessToken: string): AuthPayload => {
+  try {
+    return jwt.verify(accessToken, JWT_SECRET) as AuthPayload;
+  } catch (error) {
+    throw ERROR_MESSAGE.invalidToken;
+  }
+};
+
 export {
   generateHash,
   duplicateVerifyUser,
@@ -67,4 +83,6 @@ export {
   generateAccessToken,
   generateRefreshToken,
   verifyRefreshToken,
+  shoreVerifyRefreshToken,
+  verifyAccessToken,
 };

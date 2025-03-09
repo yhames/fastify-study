@@ -5,6 +5,10 @@ const TAuthPayload = Type.Object({
   nickname: Type.String(),
 });
 
+const TAuthHeader = Type.Object({
+  authorization: Type.Optional(Type.String()),
+});
+
 const TLoginRequest = Type.Object({
   nickname: Type.String(),
   email: Type.String(),
@@ -33,6 +37,7 @@ const TRefreshResponse = Type.Object({
 
 export {
   TAuthPayload,
+  TAuthHeader,
   TLoginRequest,
   TLoginResponse,
   TLogoutResponse,
