@@ -8,6 +8,10 @@ import type { FastifyCookieOptions } from '@fastify/cookie';
 import fastifyCookie from '@fastify/cookie';
 import { JWT_SECRET } from './global/constant';
 import { currentAuthPlugin } from './plugin/auth.plugin';
+import fastifySwagger from '@fastify/swagger';
+import { swaggerConfig, swaggerUiConfig } from './config/swagger.config';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import cors from '@fastify/cors';
 
 dotenv.config({ path: '.env' });
 
@@ -17,6 +21,12 @@ const fastify = Fastify({
   },
 }).withTypeProvider<TypeBoxTypeProvider>();
 
+await fastify.register(cors, {
+  origin: true,
+  credentials: true,
+});
+await fastify.register(fastifySwagger, swaggerConfig);
+await fastify.register(fastifySwaggerUi, swaggerUiConfig);
 await fastify.register(websocket);
 await fastify.register(fastifyCookie, {
   secret: JWT_SECRET,

@@ -81,6 +81,12 @@ npm i bcrypt jsonwebtoken @fastify/cookie
 npm i -D @types/bcrypt @types/jsonwebtoken
 ```
 
+- swagger 설치
+
+```bash
+npm i @fastify/cors @fastify/swagger @fastify/swagger-ui
+```
+
 ## fastify API 구현 가이드
 
 ### Schema 정의
