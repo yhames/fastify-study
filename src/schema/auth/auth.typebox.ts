@@ -1,5 +1,10 @@
 import { Type } from '@sinclair/typebox';
 
+const TJwtPayload = Type.Object({
+  id: Type.BigInt(),
+  nickname: Type.String(),
+});
+
 const TLoginRequest = Type.Object({
   nickname: Type.String(),
   email: Type.String(),
@@ -14,9 +19,10 @@ const TLoginResponse = Type.Object({
   Authorization: Type.String(),
 });
 
-const TJwtPayload = Type.Object({
-  id: Type.BigInt(),
-  nickname: Type.String(),
+const TLogoutResponse = Type.Object({
+  success: Type.Boolean(),
+  status: Type.Number(),
+  message: Type.String(),
 });
 
-export { TLoginRequest, TLoginResponse, TJwtPayload };
+export { TJwtPayload, TLoginRequest, TLoginResponse, TLogoutResponse };

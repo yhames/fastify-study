@@ -1,4 +1,4 @@
-import { TLoginRequest, TLoginResponse } from './auth.typebox';
+import { TLoginRequest, TLoginResponse, TLogoutResponse } from './auth.typebox';
 
 const loginSchema = {
   body: TLoginRequest,
@@ -7,4 +7,10 @@ const loginSchema = {
   },
 };
 
-export { loginSchema };
+const logoutSchema = {
+  response: {
+    205: TLogoutResponse,
+  },
+};
+
+export { loginSchema, logoutSchema };
