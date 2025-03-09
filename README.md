@@ -1,6 +1,10 @@
 # fastify-study
 
-fastify-study
+- [fastify-study](#fastify-study)
+  - [fastify 기본 설정](#fastify-기본-설정)
+  - [fastify API 구현 가이드](#fastify-api-구현-가이드)
+    - [Schema 정의](#schema-정의)
+    - [Route 구현](#route-구현)
 
 ## fastify 기본 설정
 
@@ -76,3 +80,18 @@ npm i @sinclair/typebox @fastify/type-provider-typebox
 npm i bcrypt jsonwebtoken @fastify/cookie
 npm i -D @types/bcrypt @types/jsonwebtoken
 ```
+
+## fastify API 구현 가이드
+
+### Schema 정의
+
+1. typebox 타입을 정의한다.
+2. typebox 타입을 사용하여 schema를 작성한다.
+3. typebox 타입을 사용하여 type을 생성한다.
+
+### Route 구현
+
+1. route를 작성합니다.
+2. service 로직을 작성합니다.
+3. 필요한 경우, repository에 필요한 함수를 구현합니다.
+4. 필요한 경우, utils에 helper 함수를 작성합니다.

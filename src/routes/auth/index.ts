@@ -5,13 +5,9 @@ import {
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
 } from '../../global/error/error.message';
-import { loginSchema } from '../../schema';
+import { loginSchema, logoutSchema } from '../../schema';
 import authService from '../../services/auth.service';
-import {
-  HOST,
-  JWT_EXPIRES_IN,
-  JWT_REFRESH_EXPIRES_IN,
-} from '../../global/constant';
+import { HOST, JWT_REFRESH_EXPIRES_IN } from '../../global/constant';
 
 const authRoute = async (fastify: FastifyInstance): Promise<void> => {
   fastify.post(
@@ -36,6 +32,29 @@ const authRoute = async (fastify: FastifyInstance): Promise<void> => {
       } catch (error) {
         handleError(reply, ERROR_MESSAGE.badRequest, error);
       }
+    },
+  );
+
+  fastify.delete(
+    '/logout',
+    { schema: logoutSchema },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const refreshToken = request.cookies.refresh_token;
+      if (!refreshToken) {
+        handleError(reply, ERROR_MESSAGE.unauthorized);
+        return;
+      }
+
+      const count = await authService.logoutUser(refreshToken);
+      if (count === 0) {
+        handleError(reply, ERROR_MESSAGE.unauthorized);
+        return;
+      }
+
+      reply.clearCookie('refresh_token', { path: '/' });
+      reply
+        .status(SUCCESS_MESSAGE.logoutSuccess.status)
+        .send(SUCCESS_MESSAGE.logoutSuccess);
     },
   );
 };

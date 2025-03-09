@@ -6,7 +6,6 @@ import {
 import { ERROR_MESSAGE } from '../global/error/error.message';
 import userRepository from '../repository/user.repository';
 import refreshTokenRepository from '../repository/token.repository';
-import { Prisma } from '@prisma/client';
 
 const authService = () => {
   const loginUser = async (
@@ -25,10 +24,7 @@ const authService = () => {
       id: user.id,
       nickname: user.nickname,
     });
-    await refreshTokenRepository.createRefreshToken({
-      id: user.id,
-      token: refreshToken,
-    } as Prisma.RefreshTokenCreateInput);
+    await refreshTokenRepository.createRefreshToken(user, refreshToken);
 
     const accessToken = generateAccessToken({
       id: user.id,
@@ -41,7 +37,12 @@ const authService = () => {
       Authorization: accessToken,
     } as LoginResponse;
   };
-  return { loginUser };
+
+  const logoutUser = async (refreshToken: string) => {
+    return await refreshTokenRepository.deleteRefreshToken(refreshToken);
+  };
+
+  return { loginUser, logoutUser };
 };
 
 export default authService();

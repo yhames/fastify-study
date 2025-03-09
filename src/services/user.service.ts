@@ -7,13 +7,13 @@ const userService = () => {
   const createUser = async (createUserRequest: CreateUserRequest) => {
     await duplicateVerifyUser(createUserRequest.email);
     const hashedPassword = generateHash(createUserRequest.password);
-    const createUserInput: Prisma.UserCreateInput = {
+    const newUser = {
       nickname: createUserRequest.nickname,
       email: createUserRequest.email,
       password: hashedPassword,
       profileImage: createUserRequest.profileImage,
     };
-    return await userRepository.createUser(createUserInput);
+    return await userRepository.createUser(newUser);
   };
 
   return { register: createUser };

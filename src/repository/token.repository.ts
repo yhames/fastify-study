@@ -1,12 +1,29 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, Tournament, User } from '@prisma/client';
 import prismaClient from '../global/database/prisma.client';
 
 const refreshTokenRepository = () => {
-  const createRefreshToken = async (data: Prisma.RefreshTokenCreateInput) => {
-    return await prismaClient.refreshToken.create({ data });
+  const createRefreshToken = async (user: User, refreshToken: string) => {
+    return await prismaClient.refreshToken.create({
+      data: {
+        id: user.id,
+        token: refreshToken,
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+    });
   };
 
-  return { createRefreshToken };
+  const deleteRefreshToken = async (refreshToken: string): Promise<number> => {
+    const result = await prismaClient.refreshToken.deleteMany({
+      where: { token: refreshToken },
+    });
+    return result.count;
+  };
+
+  return { createRefreshToken, deleteRefreshToken };
 };
 
 export default refreshTokenRepository();
