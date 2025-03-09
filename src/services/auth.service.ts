@@ -1,7 +1,13 @@
-import { LoginRequest, LoginResponse } from '../schema/types';
+import {
+  AuthPayload,
+  LoginRequest,
+  LoginResponse,
+  RefreshResponse,
+} from '../schema/types';
 import {
   generateAccessToken,
   verifyPassword,
+  verifyRefreshToken,
 } from '../global/auth/auth.helper';
 import { ERROR_MESSAGE } from '../global/error/error.message';
 import userRepository from '../repository/user.repository';
@@ -20,29 +26,45 @@ const authService = () => {
       throw ERROR_MESSAGE.unauthorized;
     }
 
-    const refreshToken = generateAccessToken({
+    const payload = {
       id: user.id,
       nickname: user.nickname,
-    });
+    } as AuthPayload;
+
+    const refreshToken = generateAccessToken(payload);
     await refreshTokenRepository.createRefreshToken(user, refreshToken);
 
-    const accessToken = generateAccessToken({
-      id: user.id,
-      nickname: user.nickname,
-    });
+    const accessToken = generateAccessToken(payload);
     return {
       id: user.id,
       nickname: user.nickname,
       email: user.email,
       Authorization: accessToken,
-    } as LoginResponse;
+    };
   };
 
   const logoutUser = async (refreshToken: string) => {
     return await refreshTokenRepository.deleteRefreshToken(refreshToken);
   };
 
-  return { loginUser, logoutUser };
+  const refreshUser = async (
+    refreshToken: string,
+  ): Promise<RefreshResponse> => {
+    if (!refreshToken) {
+      throw ERROR_MESSAGE.unauthorized;
+    }
+
+    const payload = await verifyRefreshToken(refreshToken);
+    const accessToken = generateAccessToken(payload);
+
+    return {
+      id: payload.id,
+      nickname: payload.nickname,
+      Authorization: accessToken,
+    };
+  };
+
+  return { loginUser, logoutUser, refreshUser };
 };
 
 export default authService();

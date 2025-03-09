@@ -69,7 +69,7 @@ const SUCCESS_MESSAGE = {
     status: 200,
     message: 'Logout Success',
   },
-  refreshTokenSuccess: {
+  refreshSuccess: {
     success: true,
     status: 200,
     message: 'token reissued',

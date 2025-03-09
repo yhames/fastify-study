@@ -5,7 +5,7 @@ import {
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
 } from '../../global/error/error.message';
-import { loginSchema, logoutSchema } from '../../schema';
+import { loginSchema, logoutSchema, refreshSchema } from '../../schema';
 import authService from '../../services/auth.service';
 import { HOST, JWT_REFRESH_EXPIRES_IN } from '../../global/constant';
 
@@ -55,6 +55,24 @@ const authRoute = async (fastify: FastifyInstance): Promise<void> => {
       reply
         .status(SUCCESS_MESSAGE.logoutSuccess.status)
         .send(SUCCESS_MESSAGE.logoutSuccess);
+    },
+  );
+
+  fastify.post(
+    '/refresh',
+    { schema: refreshSchema },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const refreshToken = request.cookies.refresh_token;
+      if (!refreshToken) {
+        handleError(reply, ERROR_MESSAGE.unauthorized);
+        return;
+      }
+      const response = await authService.refreshUser(refreshToken);
+      if (!response) {
+        handleError(reply, ERROR_MESSAGE.unauthorized);
+        return;
+      }
+      reply.status(SUCCESS_MESSAGE.refreshSuccess.status).send(response);
     },
   );
 };

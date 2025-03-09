@@ -1,6 +1,6 @@
 import { Type } from '@sinclair/typebox';
 
-const TJwtPayload = Type.Object({
+const TAuthPayload = Type.Object({
   id: Type.BigInt(),
   nickname: Type.String(),
 });
@@ -25,16 +25,16 @@ const TLogoutResponse = Type.Object({
   message: Type.String(),
 });
 
-const TRefreshToken = Type.Object({
+const TRefreshResponse = Type.Object({
   id: Type.BigInt(),
   nickname: Type.String(),
   Authorization: Type.String(),
 });
 
 export {
-  TJwtPayload,
+  TAuthPayload,
   TLoginRequest,
   TLoginResponse,
   TLogoutResponse,
-  TRefreshToken,
+  TRefreshResponse,
 };

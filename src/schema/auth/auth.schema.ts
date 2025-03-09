@@ -2,7 +2,7 @@ import {
   TLoginRequest,
   TLoginResponse,
   TLogoutResponse,
-  TRefreshToken,
+  TRefreshResponse,
 } from './auth.typebox';
 
 const loginSchema = {
@@ -20,7 +20,7 @@ const logoutSchema = {
 
 const refreshSchema = {
   response: {
-    201: TRefreshToken,
+    201: TRefreshResponse,
   },
 };
 
