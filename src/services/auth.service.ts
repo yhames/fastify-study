@@ -1,22 +1,19 @@
+import { Prisma } from '@prisma/client';
 import { duplicateVerifyUser, generateHash } from '../global/auth/auth.helper';
-import prismaClient from '../global/database/prisma.client';
+import { CreateUserRequest } from '../schema/types';
 import authRepository from '../repository/auth.repository';
 
 const authService = () => {
-  const register = async (
-    nickname: string,
-    email: string,
-    password: string,
-    profileImage: string,
-  ) => {
-    await duplicateVerifyUser(email);
-    const hashedPassword = generateHash(password);
-    return await authRepository.createUser(
-      nickname,
-      email,
-      hashedPassword,
-      profileImage,
-    );
+  const register = async (createUserRequest: CreateUserRequest) => {
+    await duplicateVerifyUser(createUserRequest.email);
+    const hashedPassword = generateHash(createUserRequest.password);
+    const createUserInput: Prisma.UserCreateInput = {
+      nickname: createUserRequest.nickname,
+      email: createUserRequest.email,
+      password: hashedPassword,
+      profileImage: createUserRequest.profileImage,
+    };
+    return await authRepository.createUser(createUserInput);
   };
 
   return { register };

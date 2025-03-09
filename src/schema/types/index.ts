@@ -1,7 +1,7 @@
 import { Static } from '@sinclair/typebox';
-import { TAuthBody, TAuthResponse } from '../auth/auth.typebox';
+import { TCreateUserRequest, TCreateUserResponse } from '../auth/auth.typebox';
 
-type AuthBody = Static<typeof TAuthBody>;
-type AuthResponse = Static<typeof TAuthResponse>;
+type CreateUserRequest = Static<typeof TCreateUserRequest>;
+type CreateUserResponse = Static<typeof TCreateUserResponse>;
 
-export { AuthBody, AuthResponse };
+export { CreateUserRequest, CreateUserResponse };

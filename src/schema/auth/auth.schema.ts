@@ -1,10 +1,9 @@
-import { Type } from '@sinclair/typebox';
-import { TAuthBody, TAuthResponse } from './auth.typebox';
+import { TCreateUserRequest, TCreateUserResponse } from './auth.typebox';
 
 const registerSchema = {
-  body: TAuthBody,
+  body: TCreateUserRequest,
   response: {
-    201: TAuthResponse,
+    201: TCreateUserResponse,
   },
 };
 

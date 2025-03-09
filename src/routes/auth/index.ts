@@ -6,19 +6,18 @@ import {
   SUCCESS_MESSAGE,
 } from '../../global/error/error.message';
 import authService from '../../services/auth.service';
-import { AuthBody } from '../../schema/types';
+import { CreateUserRequest } from '../../schema/types';
 
 const authRoute = async (fastify: FastifyInstance): Promise<void> => {
   fastify.post(
     '/register',
     { schema: registerSchema },
     async (
-      request: FastifyRequest<{ Body: AuthBody }>,
+      request: FastifyRequest<{ Body: CreateUserRequest }>,
       reply: FastifyReply,
     ) => {
-      const { nickname, email, password, profileImage } = request.body;
       try {
-        await authService.register(nickname, email, password, profileImage);
+        await authService.register(request.body);
         reply
           .status(SUCCESS_MESSAGE.registerSuccess.status)
           .send(SUCCESS_MESSAGE.registerSuccess);
