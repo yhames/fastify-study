@@ -73,6 +73,6 @@ npm i @sinclair/typebox @fastify/type-provider-typebox
 ```
 
 ```bash
-npm i bcrypt jsonwebtoken
+npm i bcrypt jsonwebtoken @fastify/cookie
 npm i -D @types/bcrypt @types/jsonwebtoken
 ```

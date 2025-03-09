@@ -1,16 +1,22 @@
 import { Type } from '@sinclair/typebox';
 
-const TCreateUserRequest = Type.Object({
+const TLoginRequest = Type.Object({
   nickname: Type.String(),
   email: Type.String(),
   password: Type.String(),
   profileImage: Type.String(),
 });
 
-const TCreateUserResponse = Type.Object({
-  status: Type.Number(),
-  success: Type.Boolean(),
-  message: Type.String(),
+const TLoginResponse = Type.Object({
+  id: Type.BigInt(),
+  nickname: Type.String(),
+  email: Type.String(),
+  Authorization: Type.String(),
 });
 
-export { TCreateUserRequest, TCreateUserResponse };
+const TJwtPayload = Type.Object({
+  id: Type.BigInt(),
+  nickname: Type.String(),
+});
+
+export { TLoginRequest, TLoginResponse, TJwtPayload };

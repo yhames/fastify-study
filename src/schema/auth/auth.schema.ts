@@ -1,10 +1,10 @@
-import { TCreateUserRequest, TCreateUserResponse } from './auth.typebox';
+import { TLoginRequest, TLoginResponse } from './auth.typebox';
 
-const registerSchema = {
-  body: TCreateUserRequest,
+const loginSchema = {
+  body: TLoginRequest,
   response: {
-    201: TCreateUserResponse,
+    201: TLoginResponse,
   },
 };
 
-export { registerSchema };
+export { loginSchema };

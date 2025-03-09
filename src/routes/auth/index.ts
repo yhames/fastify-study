@@ -1,26 +1,38 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
-import { registerSchema } from '../../schema';
 import { handleError } from '../../global/error/error.handler';
+import { LoginRequest } from '../../schema/types';
 import {
   ERROR_MESSAGE,
   SUCCESS_MESSAGE,
 } from '../../global/error/error.message';
+import { loginSchema } from '../../schema';
 import authService from '../../services/auth.service';
-import { CreateUserRequest } from '../../schema/types';
+import {
+  HOST,
+  JWT_EXPIRES_IN,
+  JWT_REFRESH_EXPIRES_IN,
+} from '../../global/constant';
 
 const authRoute = async (fastify: FastifyInstance): Promise<void> => {
   fastify.post(
-    '/register',
-    { schema: registerSchema },
+    '/login',
+    { schema: loginSchema },
     async (
-      request: FastifyRequest<{ Body: CreateUserRequest }>,
+      request: FastifyRequest<{ Body: LoginRequest }>,
       reply: FastifyReply,
     ) => {
       try {
-        await authService.register(request.body);
-        reply
-          .status(SUCCESS_MESSAGE.registerSuccess.status)
-          .send(SUCCESS_MESSAGE.registerSuccess);
+        const loginResponse = await authService.loginUser(request.body);
+
+        reply.setCookie('refresh_token', loginResponse.Authorization, {
+          domain: HOST,
+          sameSite: 'none',
+          secure: true,
+          path: '/',
+          httpOnly: true, // 중요
+          expires: new Date(Date.now() + JWT_REFRESH_EXPIRES_IN), // 7 days
+        });
+        reply.status(SUCCESS_MESSAGE.loginSuccess.status).send(loginResponse);
       } catch (error) {
         handleError(reply, ERROR_MESSAGE.badRequest, error);
       }

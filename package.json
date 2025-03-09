@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/yhames/fastify-study#readme",
   "dependencies": {
+    "@fastify/cookie": "^11.0.2",
     "@fastify/type-provider-typebox": "^5.1.0",
     "@fastify/websocket": "^11.0.2",
     "@prisma/client": "^6.4.1",

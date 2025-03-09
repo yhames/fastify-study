@@ -4,6 +4,9 @@ import dotenv from 'dotenv';
 import { TypeBoxTypeProvider } from '@fastify/type-provider-typebox';
 import routes from './routes';
 import { HOST, PORT } from './global/constant';
+import type { FastifyCookieOptions } from '@fastify/cookie';
+import fastifyCookie from '@fastify/cookie';
+import { JWT_SECRET } from './global/constant';
 
 dotenv.config({ path: '.env' });
 
@@ -13,6 +16,9 @@ const fastify = Fastify({
   },
 }).withTypeProvider<TypeBoxTypeProvider>();
 
+await fastify.register(fastifyCookie, {
+  secret: JWT_SECRET,
+} as FastifyCookieOptions);
 await fastify.register(websocket);
 await fastify.register(routes);
 
