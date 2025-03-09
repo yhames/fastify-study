@@ -65,3 +65,14 @@ npm i -D @types/dotenv
 npm i @fastify/websocket
 npm i -D @types/ws
 ```
+
+- typebox 설치
+
+```bash
+npm i @sinclair/typebox @fastify/type-provider-typebox
+```
+
+```bash
+npm i bcrypt jsonwebtoken
+npm i -D @types/bcrypt @types/jsonwebtoken
+```

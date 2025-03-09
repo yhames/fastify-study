@@ -1,6 +1,7 @@
 import { Static } from '@sinclair/typebox';
-import { authBodySchema } from '../authSchema';
+import { TAuthBody, TAuthResponse } from '../auth/auth.type';
 
-type TAuthBody = Static<typeof authBodySchema>;
+type AuthBody = Static<typeof TAuthBody>;
+type AuthResponse = Static<typeof TAuthResponse>;
 
-export { TAuthBody };
+export { AuthBody, AuthResponse };
