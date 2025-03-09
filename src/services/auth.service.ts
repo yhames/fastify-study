@@ -1,5 +1,6 @@
 import { duplicateVerifyUser, generateHash } from '../global/auth/auth.helper';
 import prismaClient from '../global/database/prisma.client';
+import authRepository from '../repository/auth.repository';
 
 const authService = () => {
   const register = async (
@@ -10,13 +11,12 @@ const authService = () => {
   ) => {
     await duplicateVerifyUser(email);
     const hashedPassword = generateHash(password);
-    const values = {
+    return await authRepository.createUser(
       nickname,
       email,
-      password: hashedPassword,
+      hashedPassword,
       profileImage,
-    };
-    return await prismaClient.user.create({ data: values });
+    );
   };
 
   return { register };
