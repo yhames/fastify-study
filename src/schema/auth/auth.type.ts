@@ -10,6 +10,7 @@ const TAuthBody = Type.Object({
   nickname: Type.String(),
   email: Type.String(),
   password: Type.String(),
+  profileImage: Type.String(),
 });
 
 export { TAuthBody, TAuthResponse };

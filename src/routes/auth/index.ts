@@ -16,10 +16,9 @@ const authRoute = async (fastify: FastifyInstance): Promise<void> => {
       request: FastifyRequest<{ Body: AuthBody }>,
       reply: FastifyReply,
     ) => {
-      const { nickname, email, password } = request.body;
-
+      const { nickname, email, password, profileImage } = request.body;
       try {
-        const user = await authService.register(nickname, email, password);
+        await authService.register(nickname, email, password, profileImage);
         reply
           .status(SUCCESS_MESSAGE.registerSuccess.status)
           .send(SUCCESS_MESSAGE.registerSuccess);
@@ -29,3 +28,5 @@ const authRoute = async (fastify: FastifyInstance): Promise<void> => {
     },
   );
 };
+
+export default authRoute;
