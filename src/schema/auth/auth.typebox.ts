@@ -25,4 +25,16 @@ const TLogoutResponse = Type.Object({
   message: Type.String(),
 });
 
-export { TJwtPayload, TLoginRequest, TLoginResponse, TLogoutResponse };
+const TRefreshToken = Type.Object({
+  id: Type.BigInt(),
+  nickname: Type.String(),
+  Authorization: Type.String(),
+});
+
+export {
+  TJwtPayload,
+  TLoginRequest,
+  TLoginResponse,
+  TLogoutResponse,
+  TRefreshToken,
+};
