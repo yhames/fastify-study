@@ -1,21 +1,21 @@
-import fastify from 'fastify';
+import Fastify from 'fastify';
 import websocket from '@fastify/websocket';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
 
-const app = fastify({
+const fastify = Fastify({
   logger: {
     level: process.env.LOG_LEVEL,
   },
 });
-await app.register(websocket);
+await fastify.register(websocket);
 
-app.get('/ping', async (request, reply) => {
+fastify.get('/ping', async (request, reply) => {
   return 'pong\n';
 });
 
-app.get('/ping/ws', { websocket: true }, (socket, req) => {
+fastify.get('/ping/ws', { websocket: true }, (socket, req) => {
   socket.on('message', (message) => {
     socket.send('pong');
   });
@@ -23,12 +23,12 @@ app.get('/ping/ws', { websocket: true }, (socket, req) => {
 
 const start = async () => {
   try {
-    await app.listen({
+    await fastify.listen({
       host: process.env.HOST || '127.0.0.1',
       port: parseInt(process.env.PORT || '8080'),
     });
   } catch (err) {
-    app.log.error(err);
+    fastify.log.error(err);
     process.exit(1);
   }
 };
