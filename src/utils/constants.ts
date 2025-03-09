@@ -1,3 +1,5 @@
+import { register } from 'module';
+
 const ERROR_MESSAGE = {
   badRequest: {
     success: false,
@@ -55,3 +57,33 @@ const ERROR_MESSAGE = {
     message: 'Internal Server Error',
   },
 } as const;
+
+const SUCCESS_MESSAGE = {
+  loginSuccess: {
+    success: true,
+    status: 200,
+    message: 'Login Success',
+  },
+  logoutSuccess: {
+    success: true,
+    status: 200,
+    message: 'Logout Success',
+  },
+  refreshTokenSuccess: {
+    success: true,
+    status: 200,
+    message: 'token reissued',
+  },
+  accessTokenSuccess: {
+    success: true,
+    status: 200,
+    message: 'access token issued',
+  },
+  registerSuccess: {
+    success: true,
+    status: 201,
+    message: 'Register Success',
+  },
+} as const;
+
+export { ERROR_MESSAGE, SUCCESS_MESSAGE };
