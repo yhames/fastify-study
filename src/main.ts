@@ -36,10 +36,17 @@ await fastify.register(routes);
 
 const start = async () => {
   try {
-    await fastify.listen({
-      host: HOST,
-      port: PORT,
-    });
+    await fastify.listen(
+      {
+        host: HOST,
+        port: PORT,
+      },
+      () => {
+        if (process.send) {
+          process.send('ready');
+        }
+      },
+    );
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
