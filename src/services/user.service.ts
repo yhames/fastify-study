@@ -15,7 +15,7 @@ const userService = () => {
     return await userRepository.createUser(newUser);
   };
 
-  return { register: createUser };
+  return { createUser };
 };
 
 export default userService();

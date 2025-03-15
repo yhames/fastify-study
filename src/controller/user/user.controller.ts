@@ -13,7 +13,7 @@ const userController = () => {
     reply: FastifyReply,
   ) => {
     try {
-      await userService.register(request.body);
+      await userService.createUser(request.body);
       reply
         .status(SUCCESS_MESSAGE.registerSuccess.status)
         .send(SUCCESS_MESSAGE.registerSuccess);
