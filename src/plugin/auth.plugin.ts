@@ -9,12 +9,12 @@ import {
   shoreVerifyRefreshToken,
 } from '../global/auth/auth.helper';
 import fp from 'fastify-plugin';
-import { AuthHeader, AuthPayload } from '../schema/types';
+import { AuthHeader } from '../schema/types';
 
 declare module 'fastify' {
   interface FastifyRequest {
     user: {
-      id: bigint;
+      id: number;
       nickname: string;
     } | null;
   }

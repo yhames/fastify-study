@@ -1,7 +1,7 @@
 import { Type } from '@sinclair/typebox';
 
 const TAuthPayload = Type.Object({
-  id: Type.BigInt(),
+  id: Type.Number(),
   nickname: Type.String(),
 });
 
@@ -17,7 +17,7 @@ const TLoginRequest = Type.Object({
 });
 
 const TLoginResponse = Type.Object({
-  id: Type.BigInt(),
+  id: Type.Number(),
   nickname: Type.String(),
   email: Type.String(),
   Authorization: Type.String(),
@@ -30,7 +30,7 @@ const TLogoutResponse = Type.Object({
 });
 
 const TRefreshResponse = Type.Object({
-  id: Type.BigInt(),
+  id: Type.Number(),
   nickname: Type.String(),
   Authorization: Type.String(),
 });

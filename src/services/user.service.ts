@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import { duplicateVerifyUser, generateHash } from '../global/auth/auth.helper';
 import { CreateUserRequest } from '../schema/types';
 import userRepository from '../repository/user.repository';

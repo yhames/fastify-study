@@ -5,6 +5,7 @@
   - [fastify API 구현 가이드](#fastify-api-구현-가이드)
     - [Schema 정의](#schema-정의)
     - [Route 구현](#route-구현)
+  - [Jest 가이드](#jest-가이드)
 
 ## fastify 기본 설정
 
@@ -87,6 +88,13 @@ npm i -D @types/bcrypt @types/jsonwebtoken
 npm i @fastify/cors @fastify/swagger @fastify/swagger-ui
 ```
 
+- jest, supertest 설치
+
+```bash
+npm i -D jest ts-jest supertest @types/jest @types/supertest
+npx ts-jest config:init;
+```
+
 ## fastify API 구현 가이드
 
 ### Schema 정의
@@ -101,3 +109,29 @@ npm i @fastify/cors @fastify/swagger @fastify/swagger-ui
 2. service 로직을 작성합니다.
 3. 필요한 경우, repository에 필요한 함수를 구현합니다.
 4. 필요한 경우, utils에 helper 함수를 작성합니다.
+
+## Jest 가이드
+
+1. jest 설정파일 추가
+
+```bash
+npx ts-jest config:init;
+```
+
+2. package.json에 실행 명령어 추가
+
+```json
+  "scripts": {
+    "build": "tsc -w --project tsconfig.json && npx -p tsconfig.json",
+    "start": "npm run dev",
+    "dev": "npx tsx src/main.ts",
+    "dev:live": "nodemon --watch 'src/' --exec node --loader ts-node/esm src/main.ts --verbose",
+    "test": "jest"  // here
+  },
+```
+
+3. `test` 폴더에 테스트 추가
+
+> 테스트 파일 이름은 xxx`.test.ts` 혹은 xxx`.spec.ts` 로 지정해야합니다.
+
+1.

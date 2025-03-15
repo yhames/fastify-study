@@ -26,7 +26,7 @@ const refreshTokenRepository = () => {
   };
 
   const getCountByIdAndToken = async (
-    id: bigint,
+    id: number,
     token: string,
   ): Promise<number> => {
     return await prismaClient.refreshToken.count({
