@@ -1,12 +1,15 @@
-import { Prisma, RefreshToken, Tournament, User } from '@prisma/client';
-import prismaClient from '../global/database/prisma.client';
+import { Prisma, RefreshToken, User } from '@prisma/client';
+import { getPrismaClient } from '../global/database/prisma/prisma.client';
 
 const refreshTokenRepository = () => {
   const createRefreshToken = async (
     user: User,
     refreshToken: string,
+    tx?: Prisma.TransactionClient,
   ): Promise<RefreshToken> => {
-    return await prismaClient.refreshToken.create({
+    const prisma = getPrismaClient(tx);
+
+    return await prisma.refreshToken.create({
       data: {
         token: refreshToken,
         user: {
@@ -18,8 +21,13 @@ const refreshTokenRepository = () => {
     });
   };
 
-  const deleteRefreshToken = async (refreshToken: string): Promise<number> => {
-    const result = await prismaClient.refreshToken.deleteMany({
+  const deleteRefreshToken = async (
+    refreshToken: string,
+    tx?: Prisma.TransactionClient,
+  ): Promise<number> => {
+    const prisma = getPrismaClient(tx);
+
+    const result = await prisma.refreshToken.deleteMany({
       where: { token: refreshToken },
     });
     return result.count;
@@ -28,8 +36,11 @@ const refreshTokenRepository = () => {
   const getCountByIdAndToken = async (
     id: number,
     token: string,
+    tx?: Prisma.TransactionClient,
   ): Promise<number> => {
-    return await prismaClient.refreshToken.count({
+    const prisma = getPrismaClient(tx);
+
+    return await prisma.refreshToken.count({
       where: {
         userId: id,
         token: token,
