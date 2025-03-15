@@ -5,5 +5,5 @@ export default interface TransactionManager {
   execute<T>(callback: (tx: unknown) => Promise<T>): Promise<T>;
 }
 
-// export const transactionManager = new PrismaTransactionManager();
-export const transactionManager = new TypeormTransactionManager();
+export const transactionManager = new PrismaTransactionManager();
+// export const transactionManager = new TypeormTransactionManager();

@@ -14,7 +14,7 @@ const userService = () => {
         email: createUserRequest.email,
         password: hashedPassword,
         profileImage: createUserRequest.profileImage,
-      } as User;
+      };
       return await userRepository.createUser(newUser, tx);
     });
   };
