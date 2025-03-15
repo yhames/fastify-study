@@ -7,7 +7,6 @@ export class TypeormTransactionManager implements TransactionManager {
     callback: (qr: QueryRunner) => Promise<T>,
   ): Promise<T> {
     const qr = datasource.createQueryRunner();
-    ``;
     // 트랜잭션 시작
     await qr.startTransaction();
     try {
