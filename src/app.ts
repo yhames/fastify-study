@@ -34,6 +34,11 @@ const buildApp = () => {
   app.register(currentAuthPlugin);
   app.register(routes);
 
+  // pingpong
+  app.get('/ping', async () => {
+    return 'pong\n';
+  });
+
   return app;
 };
 
